@@ -3,9 +3,10 @@ import { IHeaderProps } from './IHeaderProps';
 import { throws } from 'assert';
 export default class Header extends React.Component<IHeaderProps, {}> {
 
-
+    public test:string = 'something';    
     constructor(props: IHeaderProps) {
         super(props);
+        console.log(this.props.items);
 
     }
 
@@ -13,7 +14,24 @@ export default class Header extends React.Component<IHeaderProps, {}> {
         this.props.someFun("Called from Header Component");
 
         
-        return <div>{this.props.header}</div>;
+        return <div>
+            {this.props.header}
+            {
+                this.props.items.map(
+                    (item:string) => {
+                        return <div>
+                            {
+                                item
+                            }
+                        </div>;
+                    }
+                )
+            }
+            </div>;
+    }
+
+    public pubFun() {
+
     }
 
 }

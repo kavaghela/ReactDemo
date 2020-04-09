@@ -5,6 +5,7 @@ import * as Utilities from './helpers/utilities';
 import Header from './components/Header';
 export default class App extends React.Component {
 
+  private myHeaderComponent: Header | null = null;
   async componentDidMount() {
 
     // this.myAsyncFunction(
@@ -25,8 +26,8 @@ export default class App extends React.Component {
 
     var myResult = await this.betterAsync([]);
     console.log("After Better Function");
-
-
+    console.log(this.myHeaderComponent?.test);
+    this.myHeaderComponent?.pubFun();
   }
 
   private betterAsync(mytest: string[]): Promise<string | number> {
@@ -58,7 +59,7 @@ export default class App extends React.Component {
   }
 
   private parentFun(message: string): void {
-    alert(message);
+    console.log(message);
   }
   private myAsyncFunction(callBack: any) {
     console.log("API CALL STARTED")
@@ -69,9 +70,9 @@ export default class App extends React.Component {
   }
   render() {
     return <div>
-      <Header header='my header' someFun={this.parentFun}> </Header>
+      <Header items={['Item1','Item2']} ref={(c) => { this.myHeaderComponent = c; }} header='my header' someFun={this.parentFun}> </Header>
       {
-        this.getHeaderComponent()    
+        this.getHeaderComponent()
       }
       <div>
         {
@@ -84,7 +85,8 @@ export default class App extends React.Component {
   public getHeaderComponent() {
     return React.createElement(Header, {
       header: "My Header1",
-      someFun: this.parentFun
+      someFun: this.parentFun,
+      items:['Item1','Item2']
     });
   }
   public getElements(): React.ReactElement {

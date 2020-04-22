@@ -71,9 +71,7 @@ export default class App extends React.Component {
   render() {
     return <div>
       <Header items={['Item1','Item2']} ref={(c) => { this.myHeaderComponent = c; }} header='my header' someFun={this.parentFun}> </Header>
-      {
-        this.getHeaderComponent()
-      }
+     
       <div>
         {
           1 == 1 ? this.getElements() : <div>false</div>
